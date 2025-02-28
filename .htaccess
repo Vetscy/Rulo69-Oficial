@@ -1,0 +1,4 @@
+<!-- filepath: /c:/Users/Vetscy/Desktop/temas hydra/site maneiro/teste site css+/meu-site/src/.htaccess -->
+RewriteEngine On
+RewriteRule ^inicio$ inicio.html [L]
+RewriteRule ^em-breve$ em-breve.html [L]
