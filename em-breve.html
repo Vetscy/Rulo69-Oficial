@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rulo69</title>
+    
+    <!-- Adicione o favicon -->
+    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1188212025864765452/1344895080812777593/image.png?ex=67c292a6&is=67c14126&hm=d5bf99221ad17900e331a305bc966f2977b1c4bd3aeae0a634f6485027ec5e83&=&format=webp&quality=lossless&width=432&height=324">
+    
+    <!-- Meta tags para Social Media -->
+    <meta property="og:title" content="Rulo69">
+    <meta property="og:description" content="Pura diversão!">
+    <meta property="og:image" content="https://i.pinimg.com/736x/73/fc/12/73fc12d53c459d2ab2e85a00ef4e2eb3.jpg">
+    <meta property="og:url" content="https://vetscy.github.io/Rulo69-Oficial/">
+    <meta property="og:type" content="website">
+    
+    <!-- Meta tags específicas para Discord -->
+    <meta name="theme-color" content="#FF0000">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .center-video {
+            width: 268px; /* Largura fixa */
+            height: 255px; /* Altura fixa */
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            object-fit: cover; /* Mantém a proporção da imagem */
+        }
+
+        .em-breve-text {
+            color: white;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegação -->
+    <nav class="navbar">
+        <div class="logo"></div>
+        <ul>
+            <li><a href="index.html" onclick="fadeOut(event)">Voltar</a></li>
+        </ul>
+        <div class="language"></div>
+    </nav>
+
+    <!-- Conteúdo central -->
+    <div class="container">
+        <img src="https://media.tenor.com/ZdsIbPaZn64AAAAM/verycat-cateat.gif" 
+             alt="Cat eating" 
+             class="center-video">
+        <p class="em-breve-text">EM-BREVE</p>
+    </div>
+
+    <!-- Modifique a tag audio -->
+    <audio id="backgroundSound" preload="auto">
+        <source src="https://cdn.discordapp.com/attachments/1344919855286976552/1344920615366164520/Cat_Eating_Chips_-_loz.mp3?ex=67c2aa6e&is=67c158ee&hm=63f59747de2ff71dc5523fcbb919e5c7a02a06a5378d28310c14781332e414ff&" type="audio/mpeg">
+    </audio>
+
+    <!-- Adicione antes do fechamento do </body> -->
+    <script>
+        // Função para tocar o som de fundo
+        function playBackgroundSound() {
+            const sound = document.getElementById('backgroundSound');
+            sound.volume = 0.4; // 40% do volume
+            sound.loop = true; // Som em loop
+            
+            const playPromise = sound.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    console.log("Erro ao reproduzir áudio:", error);
+                    // Tenta reproduzir após interação do usuário
+                    document.addEventListener('click', function() {
+                        sound.play();
+                    }, { once: true });
+                });
+            }
+        }
+
+        // Inicia o som quando a página carrega
+        window.addEventListener('load', playBackgroundSound);
+
+        function fadeOut(event) {
+            event.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500);
+        }
+    </script>
+</body>
+</html>

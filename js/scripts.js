@@ -5,11 +5,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Código para inicializar a interatividade do site
     console.log('O site está pronto para interatividade!');
 });
-
-function showComingSoon() {
-    const mainContainer = document.querySelector('.container');
-    const comingSoonContainer = document.getElementById('comingSoonContainer');
-    
-    mainContainer.style.display = 'none';
-    comingSoonContainer.classList.add('active');
-}

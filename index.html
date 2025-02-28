@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rulo69</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1188212025864765452/1344895080812777593/image.png?ex=67c292a6&is=67c14126&hm=d5bf99221ad17900e331a305bc966f2977b1c4bd3aeae0a634f6485027ec5e83&=&format=webp&quality=lossless&width=432&height=324">
-    
     <!-- Meta tags para Social Media -->
     <meta property="og:title" content="Rulo69">
     <meta property="og:description" content="Pura diversão!">
-    <meta property="og:image" content="https://i.pinimg.com/736x/53/f7/82/53f782dd95e18ec1e73039018bc0fc7b.jpg">
+    <meta property="og:image" content="https://i.pinimg.com/736x/73/fc/12/73fc12d53c459d2ab2e85a00ef4e2eb3.jpg">
     <meta property="og:url" content="https://vetscy.github.io/Rulo69-Oficial/">
     <meta property="og:type" content="website">
     
@@ -19,6 +16,30 @@
     <meta name="theme-color" content="#FF0000">
     <meta name="twitter:card" content="summary_large_image">
     
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -27,7 +48,7 @@
         <div class="logo"></div>
         <ul>
             <li><a href="#" onclick="playScaryVideo()">Tem Coragem?</a></li>
-            <li><a href="#">em-breve</a></li>
+            <li><a href="em-breve.html" onclick="fadeOut(event)">em-breve</a></li>
         </ul>
         <div class="language"></div>
     </nav>
@@ -40,14 +61,6 @@
         <video id="scaryVideo">
             <source src="https://cdn.discordapp.com/attachments/1188212025864765452/1344882802612764703/Original_wiwiwi_cat_cat_funny_shorts_-_Bread_720p_h264.mp4?ex=67c28736&is=67c135b6&hm=815c189fe41aa47606c2212e09a642373f4e81aa4a4d2918f040bce670c9de9e&" type="video/mp4">
         </video>
-    </div>
-
-    <!-- Adicione um novo container de vídeo após o container existente -->
-    <div class="video-container" id="comingSoonContainer">
-        <video id="comingSoonVideo" autoplay loop muted>
-            <source src="https://cdn.discordapp.com/attachments/1344913147479199754/1344913240358125578/pinterest-video7.mp4" type="video/mp4">
-        </video>
-        <h1 class="video-title">EM-BREVE</h1>
     </div>
 
     <!-- Substitua o elemento de áudio existente por: -->
@@ -114,6 +127,14 @@
                 sound.pause();
                 sound.currentTime = 5; // Reset para o início do trecho
             }, 2000);
+        }
+
+        function fadeOut(event) {
+            event.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500);
         }
     </script>
 </body>

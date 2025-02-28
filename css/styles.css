@@ -168,6 +168,21 @@ nav a:hover {
     transform: scale(0.95);
 }
 
+.center-video {
+    width: 268px;
+    height: 255px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    object-fit: cover; /* Remove as bordas pretas */
+    background-color: transparent; /* Remove o fundo preto */
+}
+
+/* Remover controles do vídeo */
+.center-video::-webkit-media-controls {
+    display: none !important;
+}
+
 p {
     font-size: 1.2em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -220,31 +235,12 @@ p {
     display: none !important;
 }
 
-#comingSoonContainer {
-    display: none;
-    text-align: center;
-}
-
-#comingSoonContainer.active {
-    display: block;
-}
-
-#comingSoonContainer video {
-    width: 80%;
-    max-width: 800px;
-    border-radius: 15px;
-}
-
-.video-title {
-    color: white;
+.em-breve-text {
     font-size: 2em;
     font-weight: bold;
-    margin-bottom: 20px;
     text-transform: uppercase;
-}
-
-#comingSoonVideo::-webkit-media-controls {
-    display: none;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 footer {
