@@ -177,9 +177,11 @@ p {
 .bouncing-image {
     position: fixed;
     width: 80px;
-    height: 80px;
+    height: 80px; /* Mesma altura que a largura para ficar quadrado */
     z-index: 1;
     transition: transform 0.1s linear;
+    border-radius: 15px; /* Bordas arredondadas */
+    object-fit: cover; /* Garante que a imagem cubra todo o espaço */
 }
 
 /* Vídeo */
