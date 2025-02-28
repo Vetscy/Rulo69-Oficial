@@ -220,6 +220,33 @@ p {
     display: none !important;
 }
 
+#comingSoonContainer {
+    display: none;
+    text-align: center;
+}
+
+#comingSoonContainer.active {
+    display: block;
+}
+
+#comingSoonContainer video {
+    width: 80%;
+    max-width: 800px;
+    border-radius: 15px;
+}
+
+.video-title {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+#comingSoonVideo::-webkit-media-controls {
+    display: none;
+}
+
 footer {
     background: #35424a;
     color: #ffffff;
