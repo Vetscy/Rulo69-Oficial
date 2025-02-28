@@ -192,11 +192,14 @@ p {
 .bouncing-image {
     position: fixed;
     width: 80px;
-    height: 80px; /* Mesma altura que a largura para ficar quadrado */
+    height: 80px;
     z-index: 1;
     transition: transform 0.1s linear;
-    border-radius: 15px; /* Bordas arredondadas */
-    object-fit: cover; /* Garante que a imagem cubra todo o espaço */
+    border-radius: 15px;
+    object-fit: cover;
+    top: 0;  /* Adiciona posição inicial no topo */
+    left: 0; /* Adiciona posição inicial na esquerda */
+    pointer-events: none; /* Evita interferência com outros elementos */
 }
 
 /* Vídeo */

@@ -90,9 +90,11 @@
             const maxX = window.innerWidth - dvd.offsetWidth;
             const maxY = window.innerHeight - dvd.offsetHeight;
 
-            x += speedX;
-            y += speedY;
+            // Limita a posição dentro dos limites da tela
+            x = Math.max(0, Math.min(x + speedX, maxX));
+            y = Math.max(0, Math.min(y + speedY, maxY));
 
+            // Inverte a direção quando atinge os limites
             if (x <= 0 || x >= maxX) speedX = -speedX;
             if (y <= 0 || y >= maxY) speedY = -speedY;
 
