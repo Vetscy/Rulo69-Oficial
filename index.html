@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rulo69</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Barra de navegação -->
+    <nav class="navbar">
+        <div class="logo"></div>
+        <ul>
+            <li><a href="#" onclick="playScaryVideo()">Tem Coragem?</a></li>
+            <li><a href="#">em-breve</a></li>
+        </ul>
+        <div class="language"></div>
+    </nav>
+
+    <!-- Imagem quicante -->
+    <img class="bouncing-image" src="https://media.discordapp.net/attachments/1272006439300501555/1344876766941941860/image.png?ex=67c28197&is=67c13017&hm=53e11371da72adae76fe1925ae893c0aef5762dbd5fb4e52578dedb182497e2c&=&format=webp&quality=lossless&width=289&height=270" alt="Imagem quicando">
+
+    <!-- Container do vídeo -->
+    <div class="video-container" id="videoContainer">
+        <video id="scaryVideo">
+            <source src="https://cdn.discordapp.com/attachments/1188212025864765452/1344882802612764703/Original_wiwiwi_cat_cat_funny_shorts_-_Bread_720p_h264.mp4?ex=67c28736&is=67c135b6&hm=815c189fe41aa47606c2212e09a642373f4e81aa4a4d2918f040bce670c9de9e&" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Substitua o elemento de áudio existente por: -->
+    <audio id="clickSound">
+        <source src="https://cdn.discordapp.com/attachments/1188212025864765452/1344897750717829181/mmaaAAAaah_looped_video__Original_Video_https__youtu.be_SWkMYO9V_-k__-_Gem-Lapuz.mp3?ex=67c29522&is=67c143a2&hm=a2ddb5d0402be78931a5be8a5b4e83bf7cafc38d4e0d959c35cab0af9ceab1c6&" type="audio/mpeg">
+    </audio>
+
+    <!-- Conteúdo central -->
+    <div class="container">
+        <img class="center-image" src="https://i.pinimg.com/736x/70/0a/28/700a2802c83b02254021269784cf8ee6.jpg" 
+             alt="Imagem central" 
+             onclick="playClickSound()">
+        <p>tem nada aqui não doido, queria ver o que?</p>
+    </div>
+
+    <!-- Script para animação e vídeo -->
+    <script>
+        // Animação da imagem quicante
+        const dvd = document.querySelector('.bouncing-image');
+        let x = 0, y = 0;
+        let speedX = 2, speedY = 2;
+
+        function animateDVD() {
+            const maxX = window.innerWidth - dvd.offsetWidth;
+            const maxY = window.innerHeight - dvd.offsetHeight;
+
+            x += speedX;
+            y += speedY;
+
+            if (x <= 0 || x >= maxX) speedX = -speedX;
+            if (y <= 0 || y >= maxY) speedY = -speedY;
+
+            dvd.style.transform = `translate(${x}px, ${y}px)`;
+            requestAnimationFrame(animateDVD);
+        }
+
+        animateDVD();
+
+        // Reprodução do vídeo
+        function playScaryVideo() {
+            const videoContainer = document.getElementById('videoContainer');
+            const video = document.getElementById('scaryVideo');
+            
+            videoContainer.classList.add('active');
+            video.play();
+
+            video.onended = function() {
+                videoContainer.classList.add('closing');
+                setTimeout(() => {
+                    videoContainer.classList.remove('active');
+                    videoContainer.classList.remove('closing');
+                }, 500); // Tempo da animação em milissegundos
+            };
+        }
+
+        // Adicione o script
+        function playClickSound() {
+            const sound = document.getElementById('clickSound');
+            sound.currentTime = 5; // Inicia aos 5 segundos
+            sound.play();
+            
+            // Parar o áudio após 2 segundos (7 - 5 = 2 segundos de duração)
+            setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 5; // Reset para o início do trecho
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
