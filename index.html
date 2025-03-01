@@ -44,6 +44,7 @@
         }
     </style>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/discord-auth.js" defer></script>
 </head>
 <body>
     <!-- Barra de navegação -->
@@ -52,7 +53,12 @@
         <ul>
             <li><a href="#" onclick="playScaryVideo()">Tem Coragem?</a></li>
             <li><a href="em-breve.html" onclick="fadeOut(event)">em-breve</a></li>
+            <li><a href="pagina-nova.html" onclick="fadeOut(event)">Gato Chips</a></li>
         </ul>
+        <a href="#" onclick="loginWithDiscord(event)" class="login-btn">
+            <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-0.png" alt="Discord">
+            Login
+        </a>
         <div class="language"></div>
     </nav>
 

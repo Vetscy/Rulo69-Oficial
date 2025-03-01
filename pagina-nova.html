@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gato Chips - Bot</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #000;
+            overflow-y: auto;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://steamuserimages-a.akamaihd.net/ugc/2545179497176495513/EFA56B1513ACC9B5392FE372DCE069D41926FD84/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        .page-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 100px 20px 50px; /* Espaço para navbar no topo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .info-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .bot-image {
+            width: 268px;
+            height: 255px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .bot-text {
+            flex: 1;
+            text-align: left;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .add-bot-section {
+            margin-top: 30px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 20px;
+            /* Removidas as propriedades de fundo e borda */
+        }
+
+        .add-bot-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px); /* Adicionado blur apenas no botão */
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .add-bot-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+        }
+
+        .add-bot-button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .add-bot-button span {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .commands-section {
+            position: relative;
+            margin-top: 40px;
+            text-align: center;
+            background: transparent;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .commands-image {
+            width: 100%;
+            max-width: 793px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 2000px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s ease;
+            z-index: 2;
+        }
+
+        .commands-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0) 45%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 55%,
+                transparent 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border-radius: 10px;
+            z-index: 3;
+        }
+
+        .commands-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.4),
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            border-radius: 10px;
+            filter: blur(15px);
+            mix-blend-mode: soft-light;
+            z-index: 3;
+        }
+
+        .commands-image:hover {
+            transform: perspective(1000px) rotateX(10deg) rotateY(5deg) scale(1.02);
+            box-shadow: 
+                0 20px 30px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .commands-image:hover::before {
+            opacity: 1;
+            animation: shine 1.5s ease-in-out infinite;
+        }
+
+        .commands-image:hover::after {
+            opacity: 1;
+        }
+
+        .commands-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .commands-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            z-index: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Estilização da barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .news-section {
+            position: relative;
+            margin-top: 40px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .news-title {
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .news-text {
+            color: white;
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script src="js/discord-auth.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"></div>
+        <ul>
+            <li><a href="index.html" onclick="fadeOut(event)">Voltar</a></li>
+        </ul>
+        <a href="#" onclick="loginWithDiscord(event)" class="login-btn">
+            <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-0.png" alt="Discord">
+            Login
+        </a>
+    </nav>
+
+    <div class="page-container">
+        <div class="info-container">
+            <img class="bot-image" 
+                 src="https://media.discordapp.net/attachments/1344913147479199754/1345180671143837746/eating-cat-cat-eating.gif?ex=67c39ca0&is=67c24b20&hm=0c1bb2fff32c8790873562c887fdb805b70156bfdd595716d6eca07b4df3598b&=&width=148&height=191" 
+                 alt="Gato Chips">
+            <div class="bot-text">
+                Gato Chips é um bot de música em desenvolvimento, projetado para oferecer uma experiência completa. No momento, ele toca músicas do YouTube sem limitações, garantindo que você possa ouvir qualquer música que quiser com facilidade. Além disso, novas funcionalidades estão a caminho!
+            </div>
+        </div>
+        
+        <div class="add-bot-section">
+            <a href="https://discord.com/oauth2/authorize?client_id=1288742283734159401&permissions=0&integration_type=0&scope=bot" 
+               target="_blank" 
+               class="add-bot-button">
+                <img src="https://media.discordapp.net/attachments/1344913147479199754/1345181397446426745/add.png?ex=67c39d4d&is=67c24bcd&hm=a64a89ffb4452193dcd43be789d079743727e652c1586b00107ddc1017a07df4&=&format=webp&quality=lossless&width=451&height=450" 
+                     alt="Adicionar">
+                <span>Adicionar Bot</span>
+            </a>
+        </div>
+
+        <div class="commands-section">
+            <img class="commands-image" 
+                 src="https://media.discordapp.net/attachments/1344913147479199754/1345183973994663967/image.png?ex=67c39fb3&is=67c24e33&hm=8bff943caf0ba56d36bc62d024386309fc0c72bf737357eb5533c65691b0284a&=&format=webp&quality=lossless&width=793&height=350"
+                 alt="Comandos do Bot">
+            <p class="commands-text">
+                Existem várias maneiras de remover o bot da chamada de voz. Você pode usar os comandos: !stop, !leave, !disconnect ou !quit. Escolha o que preferir!
+            </p>
+        </div>
+
+        <div class="news-section">
+            <h2 class="news-title">Quais são as novidades?</h2>
+            <p class="news-text">
+                Ainda não há novidades, mas em breve o Gato Chips receberá novas funcionalidades para melhorar sua experiência! Fique ligado para futuras atualizações. 🚀
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function fadeOut(event) {
+            event.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500);
+        }
+
+        // Adicione este novo código para o efeito de movimento
+        const commandsImage = document.querySelector('.commands-image');
+        const commandsSection = document.querySelector('.commands-section');
+
+        commandsSection.addEventListener('mousemove', (e) => {
+            const rect = commandsSection.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            const xRotation = ((mouseY - rect.height / 2) / rect.height) * -20;
+            const yRotation = ((mouseX - rect.width / 2) / rect.width) * 20;
+            
+            // Atualiza a posição do brilho
+            commandsImage.style.setProperty('--mouse-x', `${(mouseX / rect.width) * 100}%`);
+            commandsImage.style.setProperty('--mouse-y', `${(mouseY / rect.height) * 100}%`);
+            
+            // Aplica a rotação suave
+            commandsImage.style.transform = `
+                perspective(1000px)
+                rotateX(${xRotation}deg)
+                rotateY(${yRotation}deg)
+                scale3d(1.05, 1.05, 1.05)
+            `;
+        });
+
+        commandsSection.addEventListener('mouseleave', () => {
+            commandsImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    </script>
+</body>
+</html>
