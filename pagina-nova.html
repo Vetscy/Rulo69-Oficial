@@ -306,6 +306,43 @@
             border-radius: 8px;
             object-fit: cover;
         }
+
+        .updates-section {
+            position: relative;
+            margin-top: 40px;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .updates-title {
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .updates-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .updates-list p {
+            color: white;
+            font-size: 1.1em;
+            line-height: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            margin: 10px 0;
+        }
     </style>
     <script src="js/discord-auth.js" defer></script>
 </head>
@@ -359,6 +396,17 @@
                 <p class="news-text">
                     O prefixo do bot foi alterado para g!! Agora, use g! antes dos comandos para interagir com o Gato Chips
                 </p>
+            </div>
+        </div>
+
+        <div class="updates-section">
+            <h2 class="updates-title">O que virá de novo para o Gato Chips muito em breve?</h2>
+            <div class="updates-list">
+                <p>🚀 Adição de ícone na guia – Agora o bot terá um ícone personalizado para uma experiência mais visual.</p>
+                <p>🎵 Suporte ao Spotify – Agora o bot pode tocar músicas diretamente do Spotify!</p>
+                <p>👋 Sistema de Boas-Vindas – Mensagens automáticas para recepcionar novos membros no servidor.</p>
+                <p>🎟️ Sistema de Tickets – Criação de tickets para suporte e organização dentro do servidor.</p>
+                <p>🚀 E mais novidades em breve! Fique atento!</p>
             </div>
         </div>
     </div>
